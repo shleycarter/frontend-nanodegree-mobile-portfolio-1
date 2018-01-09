@@ -504,11 +504,11 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   
   // document.body.scrollTop is no longer supported in Chrome. Used pageYOffset instead as per https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-  var pizzaMove = document.body.scrollTop / 1250;
+  var scrollTop = window.pageYOffset;
   var items = document.getElementsByClassName('mover');
   
     for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(pizzaMove + (i % 5));
+    var phase = Math.sin((scrollTop / 2000) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
