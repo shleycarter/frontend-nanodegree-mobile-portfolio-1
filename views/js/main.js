@@ -448,7 +448,7 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  // Optimization: Replaced querySelectorAll with getElementsByClassName as per https://jsperf.com/getelementsbyclassname-vs-queryselectorall/18
+  // Optimized by Replacing querySelectorAll with getElementsByClassName as per https://jsperf.com/getelementsbyclassname-vs-queryselectorall/18
   function changePizzaSizes(size) {
     var pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
     var dx = determineDx(pizzaContainers[0], size);
@@ -502,12 +502,13 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  // document.body.scrollTop is no longer supported in Chrome. Used scrollY instead
-  var scrollTop = window.scrollY;
-
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop / 2000) + (i % 5));
+  
+  // document.body.scrollTop is no longer supported in Chrome. Used pageYOffset instead as per https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
+  var pizzaMove = document.body.scrollTop / 1250;
+  var items = document.getElementsByClassName('mover');
+  
+    for (var i = 0; i < items.length; i++) {
+    var phase = Math.sin(pizzaMove + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -528,13 +529,14 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < window.innerHeight; i++) {
+
+  for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.webp";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
