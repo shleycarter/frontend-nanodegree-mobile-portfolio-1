@@ -503,13 +503,14 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   
-  // document.body.scrollTop is no longer supported in Chrome. Used pageYOffset instead as per https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY
-  var scrollTop = window.pageYOffset;
+  // document.body.scrollTop is no longer supported in Chrome. Used pageYOffset instead as per
+  // https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY for better cross browser compatibility
+  // Moved the division out of the loop so it's called only once - var phase = Math.sin((scrollTop / 2000) + (i % 5));
+  var pageScroll = window.pageYOffset / 1250;
   var items = document.getElementsByClassName('mover');
-  
-    for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop / 2000) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  for (var i = 0; i < items.length; i++) {
+      var phase = Math.sin(pageScroll + (i % 5));
+      items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -529,14 +530,15 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-
+  var animatedPizzas = document.getElementById("movingPizzas1");
+  var onScreenPizzas = 
   for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.webp";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);
+    animatedPizzas.appendChild(elem);
   }
   updatePositions();
 });
