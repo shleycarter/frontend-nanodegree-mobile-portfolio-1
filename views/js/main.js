@@ -532,18 +532,22 @@ document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
   var animatedPizzas = document.getElementById("movingPizzas1");
   var amountOfPizza = 0;
-  var viewportWidth = window.innerWidth
+  var viewportWidth = window.innerWidth;
   // Calculates the number of pizzas needed to fill the screen
   // depending on the viewport size / bootstrap break points
   function calculatePizzas(i) {
     if (i >= 1200) {
-      return amountOfPizza = 64;
+      amountOfPizza = 64;
+      return amountOfPizza;
     } else if (i >= 992){
-      return amountOfPizza = 48;
+      amountOfPizza = 48;
+      return amountOfPizza;
     } else if (i >= 768){
-      return amountOfPizza = 45;
+      amountOfPizza = 45;
+      return amountOfPizza;
     } else {
-        return amountOfPizza = 16;
+      amountOfPizza = 16;
+        return amountOfPizza;
     }
   }
   calculatePizzas(viewportWidth);
