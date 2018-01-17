@@ -15,14 +15,10 @@ Optimized images, eliminated render blocking JS and CSS for above the fold conte
 
 1. Fixed janky performance of the pizza size slider, replaced querySelectorAll with getElementsByClassName
 2. Did a lot of work on the updatePositions function to eliminate the layout thrashing that was happening
-
-..* Replaced document.body.scrollTop with window.payYOffset as per MDN suggestion for better compatibility
-
-..* Took the division operator out of the loop because it only needs to be calculated once
-
-..* Added viewportWidth function to dynamically calculate the number of pizzas required to fill the screen using bootstrap break points
-
-..* Took document.getElementById("movingPizzas1") out of the for loop because it only needs to run once
+  * Replaced document.body.scrollTop with window.payYOffset as per MDN suggestion for better compatibility
+  * Took the division operator out of the loop because it only needs to be calculated once
+  * Added viewportWidth function to dynamically calculate the number of pizzas required to fill the screen using bootstrap break points
+  * Took document.getElementById("movingPizzas1") out of the for loop because it only needs to run once
 3. Animations are now averaging over 60FPS on the pizza page
 
 ## Running this Site
