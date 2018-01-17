@@ -6,7 +6,7 @@
 
 Optimized images, eliminated render blocking JS and CSS for above the fold content
 
-#####PageSpeed Scores: M:92 D:94
+##### PageSpeed Scores: M:92 D:94
 
 #### Part 2: Optimize Frames per Second in pizza.html
 
